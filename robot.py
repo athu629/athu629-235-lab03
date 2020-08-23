@@ -51,11 +51,11 @@ class Robot:
         if self._state.direction == Direction.NORTH:
             self._state.row -= 1
         elif self._state.direction == Direction.EAST:
-            self._state.col -= 1
+            self._state.col += 1
         elif self._state.direction == Direction.SOUTH:
             self._state.row += 1
         elif self._state.direction == Direction.WEST:
-            self._state.col += 1
+            self._state.col -= 1
 
     def back_track(self):
         if len(self._history) > 1:
