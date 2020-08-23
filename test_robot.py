@@ -97,3 +97,39 @@ def test_illegal_move_west(robot):
     with pytest.raises(IllegalMoveException):
         robot.move()
 
+def test_back_track_after_one_move(robot):
+    robot.move()
+    robot.back_track()
+    state = robot.state()
+    assert state['row'] == 10
+    assert state['col'] == 1
+
+def test_back_track_after_one_turn(robot):
+    robot.turn()
+    robot.back_track()
+    state = robot.state()
+    assert state['direction'] == Direction.NORTH
+
+def test_back_track_once_after_three_moves(robot):
+    robot.move()
+    robot.move()
+    robot.move()
+    robot.back_track()
+    state = robot.state()
+    assert state['row'] == 8
+    assert state['col'] == 1
+
+def test_back_track_all_moves(robot):
+    robot.turn()
+    robot.move()
+    robot.turn()
+    robot.turn()
+    robot.turn()
+    robot.move()
+    robot.move()
+    while len(robot._history) != 1:
+        robot.back_track()
+    state = robot.state()
+    assert state['direction'] == Direction.NORTH
+    assert state['row'] == 10
+    assert state['col'] == 1
