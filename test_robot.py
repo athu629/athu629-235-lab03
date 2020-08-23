@@ -18,7 +18,6 @@ def test_constructor(robot):
 
 def test_east_turn(robot):
     robot.turn()
-
     state = robot.state()
     assert state['direction'] == Direction.EAST
 
@@ -44,4 +43,22 @@ def test_back_track_without_history(robot):
     assert state['direction'] == Direction.NORTH
     assert state['row'] == 10
     assert state['col'] == 1
+
+def test_north_turn(robot):
+    robot._state.direction = Direction.WEST
+    robot.turn()
+    state = robot.state()
+    assert state['direction'] == Direction.NORTH
+
+def test_south_turn(robot):
+    robot._state.direction = Direction.EAST
+    robot.turn()
+    state = robot.state()
+    assert state['direction'] == Direction.SOUTH
+
+def test_west_turn(robot):
+    robot._state.direction = Direction.SOUTH
+    robot.turn()
+    state = robot.state()
+    assert state['direction'] == Direction.WEST
 
